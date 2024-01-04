@@ -25,6 +25,7 @@ button {
         cursor: pointer;
         background: linear-gradient(260deg, #fe3072, #ff5940);
     }
+
 }
 
 body {
@@ -56,6 +57,11 @@ nav {
         padding: 0.8em 1.2em;
         border-radius: 0.8em;
         margin: 10px;
+
+        &:disabled {
+            background-color: rgb(181, 180, 180);
+            color: rgb(160, 38, 75);
+        }
     }
 }
 
@@ -69,3 +75,21 @@ nav {
     position: fixed;
     background: $background-gradient;
 }
+
+// auth-modal
+
+.auth-modal-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+    .auth-modal {
+        max-width: 360px;
+        height: 600px;
+        background-color: white;
+        border-radius: 10px;
+        padding: 40px;
+    }
+}
+
+
