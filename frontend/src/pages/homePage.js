@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import Nav from '../components/Nav'
 import AuthModal from '../components/AuthModal';
 
+
 function HomePage() {
     const [showModal, setShowModal] = useState(false);
     const authToken = false;

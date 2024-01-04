@@ -81,7 +81,7 @@ nav {
 .auth-modal-wrapper {
     display: flex;
     width: 100%;
-    justify-content: center;
+    justify-content: center;;
 
     .auth-modal {
         max-width: 360px;
@@ -89,6 +89,11 @@ nav {
         background-color: white;
         border-radius: 10px;
         padding: 40px;
+        display: flex;
+
+        p {
+            order: -1;
+        }
     }
 }
 
