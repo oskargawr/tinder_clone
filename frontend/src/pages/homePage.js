@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import Nav from '../components/Nav'
 import AuthModal from '../components/AuthModal';
+import AuthModalForm from '@/components/AuthModalForm';
 
 
 function HomePage() {
