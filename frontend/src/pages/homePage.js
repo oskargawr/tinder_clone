@@ -24,6 +24,7 @@ function HomePage() {
         </button>
 
         {showModal && <AuthModal setShowModal={setShowModal}/>}
+
     </div>
     </div>
     </>

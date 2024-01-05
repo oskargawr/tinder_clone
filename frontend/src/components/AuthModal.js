@@ -18,7 +18,7 @@ function AuthModal({setShowModal}) {
           <h2 className=''> {isSignUp ? 'CREATE ACCOUNT' : 'LOG IN'}</h2>
           <p>By clicking Log In, you agree to our terms. Learn how we process your data in our Privacy Policy and Cook</p>
           <AuthModalForm />
-          <p>AUTH MODAL</p>
+        <hr />
       </div>
     </div>
   )

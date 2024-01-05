@@ -81,7 +81,7 @@ nav {
 .auth-modal-wrapper {
     display: flex;
     width: 100%;
-    justify-content: center;;
+    justify-content: center;
 
     .auth-modal {
         max-width: 360px;
@@ -90,11 +90,68 @@ nav {
         border-radius: 10px;
         padding: 40px;
         display: flex;
+        flex-direction: column;
 
         p {
-            order: -1;
+            order: 1;
+            font-size: 0.5em;
+        }
+
+        hr {
+            order: 0;
+            margin: 1em 0;
         }
     }
 }
 
 
+// auth modal form
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+    input {
+        width: 200px;
+        padding: 5px;
+        border-radius: 1em;
+        border: none;
+        align-self: center;
+        border: solid 1px;
+    }
+    .input-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3em;
+        position: relative;
+
+        .error-message {
+            position: absolute;
+            bottom: -1.5em;
+            right: 0;
+            color: red;
+            font-size: 0.7em;
+        }
+    }
+
+
+}
+
+.secondary-button {
+    align-self: center;
+    margin-top: 1.5em;
+    color: rgb(121, 119, 119);
+    background-color: white;
+    font-weight: 500;
+    font-size: 15px;
+    text-transform: uppercase;
+    padding: 12px 30px;
+    border-radius: 30px;
+    border: solid 2px rgb(121, 119, 119);
+
+    &:hover {
+        cursor: pointer;
+        background-color: rgb(121, 119, 119);
+        color: white;
+    }
+}
