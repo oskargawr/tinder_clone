@@ -1,7 +1,7 @@
 import React from 'react'
-import HomePage from './homePage';
-import Dashboard from './dashboard';
-import OnBoarding from './onBoarding';
+import HomePage from './Home';
+import DashboardPage from './dashboard';
+import Boarding from './boarding';
 import { useRouter } from 'next/router'
 import '../style/index.scss';
 
@@ -15,10 +15,10 @@ function App() {
             Component = HomePage;
             break;
         case '/dashboard':
-            Component = Dashboard;
+            Component = DashboardPage;
             break;
-        case '/onboarding':
-            Component = OnBoarding;
+        case '/boarding':
+            Component = Boarding;
             break;
         default:
             Component = HomePage;

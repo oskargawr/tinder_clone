@@ -20,6 +20,7 @@ button {
     background: $primary-button-gradient;
     padding: 1.2em 1.7em;
     border-radius: 2em;
+    margin-bottom: 0.3em;
 
     &:hover {
         cursor: pointer;
@@ -44,37 +45,55 @@ nav {
         width: 170px;
         margin: 15px;
 
-        .logo {
-            width: 100%;
-            height: auto;
-        }
     }
 
     .nav-button {
         color: #fe3072;
         background-color: white;
-        font-size: 1.5em;
-        padding: 0.8em 1.2em;
+        font-size: 1em;
+        font-weight: 600;
+        padding: 0.6em 1em;
         border-radius: 0.8em;
         margin: 10px;
+
+  
+
+        &:hover {
+            cursor: pointer;
+        }
 
         &:disabled {
             background-color: rgb(181, 180, 180);
             color: rgb(160, 38, 75);
+            cursor: default;
         }
     }
 }
 
-// ----
-
-// 
+// ---- homepage
 
 .overlay {
     width: 100vw;
     height: 100vh;
     position: fixed;
-    background: $background-gradient;
+    background: $background-gradient, url('../images/background.webp');
+    display: flex;
+    flex-direction: column;
 }
+
+.primary-title {
+    font-size: 4em;
+    font-weight: 700;
+    color: white;
+    margin: 0.3em 0;
+}
+
+// .home {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+// }
 
 // auth-modal
 
@@ -100,6 +119,15 @@ nav {
         hr {
             order: 0;
             margin: 1em 0;
+        }
+
+        .close-icon {
+            width: fit-content;
+            align-self: center;
+
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
 }

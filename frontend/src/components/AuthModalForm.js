@@ -2,9 +2,7 @@ import React from 'react'
 import { Formik, Form, ErrorMessage, Field } from 'formik';
 import * as Yup from 'yup';
 
-function AuthModalForm() {
-    const isSignUp = true;
-
+function AuthModalForm({isSignUp}) {
     const initialValues = {
         email: '',
         password: '',
