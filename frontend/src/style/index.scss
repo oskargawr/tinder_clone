@@ -183,3 +183,120 @@ nav {
         color: white;
     }
 }
+
+// on boarding form
+
+.onboarding {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+
+    h2 {
+        font-style: italic;
+    }
+}
+
+.onboarding-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+
+    button {
+        align-self: center;
+        padding: 15px 30px;
+        border: solid 2px rgb(219, 219, 219);
+        border-radius: 10px;
+        background-color: white;
+        color: rgb(121, 119, 119);
+        font-weight: 500;
+        font-size: 15px;
+        text-transform: uppercase;
+
+        &:hover {
+            cursor: pointer;
+            background-color: rgb(121, 119, 119);
+            color: white;
+        }
+
+    }
+
+    .form-content {
+        display: flex;
+        gap: 0.3em;
+        width: 800px;
+        // border: solid 1px;
+
+        .left-side-form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.3em;
+            width: 400px;
+            // border: solid 1px;
+
+            input, select, textarea {
+                width: 300px;
+                padding: 10px 15px;
+                margin: 10px 0;
+                font-size: 15px;
+                border: solid 2px rgb(219, 219, 219);
+                border-radius: 10px;
+                appearance: none;
+                }
+
+            textarea {
+                resize: none;
+                overflow-y: auto;
+                height: 100px;
+            }
+
+        }
+        .input-wrapper {
+            display: flex;
+            gap: 0.3em;
+            position: relative;
+
+            .error-message {
+                color: red;
+                font-size: 0.7em;
+                align-self: center;
+            }
+        }
+
+        .photo-section {
+            // border: solid 1px;
+            flex-grow: 1;
+            align-items: flex-end;
+
+            input {
+                width: 300px;
+                padding: 10px 15px;
+                margin: 10px 0;
+                font-size: 15px;
+                border: solid 2px rgb(219, 219, 219);
+                border-radius: 10px;
+                appearance: none;
+            }
+
+            .photo-container {
+                height: 350px;
+                width: 350px;
+                border-radius: 10px;
+                border: solid 2px rgb(219, 219, 219);
+
+                img {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            
+        }
+    }
+
+
+}
+
+// dashboard

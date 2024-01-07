@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
@@ -13,6 +13,18 @@ const RegistrationForm = () => {
         about: '',
         location: '',
     };
+
+    const [formData, setFormData] = useState({
+        first_name: '',
+        last_name: '',
+        dob: '',
+        gender: '',
+        gender_interest: '',
+        img_url: '',
+        about: '',
+        location: '',
+        matches: [],
+    })
 
     const isUnder18 = (dob) => {
         const today = new Date();
@@ -33,52 +45,105 @@ const RegistrationForm = () => {
         gender: Yup.string().required('Required'),
         gender_interest: Yup.string().required('Required'),
         img_url: Yup.string().url('Invalid URL').required('Required'),
-        about: Yup.string().required('Required'),
+        about: Yup.string().required('Required').max(200, 'Must be 200 characters or less'),
         location: Yup.string().required('Required'),
     });
 
     const onSubmit = (values) => {
         console.log('Form data', values);
+        setFormData({
+            first_name: values.first_name,
+            last_name: values.last_name,
+            dob: values.dob,
+            gender: values.gender,
+            gender_interest: values.gender_interest,
+            img_url: values.img_url,
+            about: values.about,
+            location: values.location,
+            matches: [],
+        })
+        console.log('dane z form', formData);
+    };
+
+    const handleImgUrlChange = (event, setFieldValue) => {
+        const imgUrl = event.target.value;
+        setFieldValue('img_url', imgUrl);
+        setFormData({
+            ...formData,
+            img_url: imgUrl,
+        });
     };
 
     return (
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-            <Form>
+            {({ setFieldValue }) => (
+            <Form className='onboarding-form'>
+                <div className="form-content">
+                <section className='left-side-form'>
+                <div className="input-wrapper">
                 <Field type='text' id='first_name' name='first_name' placeholder='First Name' />
-                <ErrorMessage name='first_name' />
+                <ErrorMessage name='first_name' component="div" className="error-message"/>
+                </div>
 
+                <div className="input-wrapper">
                 <Field type='text' id='last_name' name='last_name' placeholder='Last Name' />
-                <ErrorMessage name='last_name' />
+                <ErrorMessage name='last_name' component="div" className="error-message"/>
+                </div>
 
+                <div className="input-wrapper">
                 <Field type='date' id='dob' name='dob' />
-                <ErrorMessage name='dob' />
+                <ErrorMessage name='dob' component="div" className="error-message"/>
+                </div>
 
+                <div className="input-wrapper">
                 <Field as='select' id='gender' name='gender'>
                     <option value=''>Select Gender</option>
                     <option value='male'>Male</option>
                     <option value='female'>Female</option>
                 </Field>
-                <ErrorMessage name='gender' />
+                <ErrorMessage name='gender' component="div" className="error-message"/>
+                </div>
 
+                <div className="input-wrapper">
                 <Field as='select' id='gender_interest' name='gender_interest'>
                     <option value=''>Interested in</option>
                     <option value='male'>Male</option>
                     <option value='female'>Female</option>
                     <option value='both'>Both</option>
                 </Field>
-                <ErrorMessage name='gender_interest' />
+                <ErrorMessage name='gender_interest' component="div" className="error-message"/>
+                </div>
 
-                <Field type='text' id='img_url' name='img_url' placeholder='Image URL' />
-                <ErrorMessage name='img_url' />
 
+
+                <div className="input-wrapper">
                 <Field as='textarea' id='about' name='about' placeholder='About You' />
-                <ErrorMessage name='about' />
+                <ErrorMessage name='about' component="div" className="error-message"/>
+                </div>
 
+                <div className="input-wrapper">
                 <Field type='text' id='location' name='location' placeholder='Location' />
-                <ErrorMessage name='location' />
+                <ErrorMessage name='location' component="div" className="error-message"/>
+                </div>
+                </section>
+                
 
-                <button type='submit'>Register</button>
+
+                <section className="photo-section">
+                <div className="input-wrapper">
+                <Field type='text' id='img_url' name='img_url' placeholder='Image URL' onChange={(event) => handleImgUrlChange(event, setFieldValue)} />
+                <ErrorMessage name='img_url' component="div" className="error-message"/>
+                </div>
+                <div className="photo-container">
+                    <img src={formData.img_url} alt="User Image" />
+                </div>
+                </section>
+                </div>
+                
+
+                <button type='submit'>Submit</button>
             </Form>
+            )}
         </Formik>
     );
 };

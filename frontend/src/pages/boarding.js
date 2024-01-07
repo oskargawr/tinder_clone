@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import Nav from '../components/Nav.js'
 import RegistrationForm from '../components/OnBoardingForm.js'
+import '../style/index.scss';
 
 function Boarding() {
   return (
