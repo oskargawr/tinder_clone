@@ -7,25 +7,22 @@ function DashboardPage() {
 
   const db = [
   {
-    name: 'Richard Hendricks',
-    url: 'https://i.imgur.com/NfgFwox.jpeg'
+    name: 'Agata Bartczak',
+    url: 'https://i.ibb.co/LSLZBBt/agata.jpg'
   },
   {
-    name: 'Erlich Bachman',
-    url: 'https://example.com/erlich.jpg'
+    name: 'Szymon Grabski',
+    url: 'https://i.ibb.co/rckDXbC/szymon.jpg'
   },
   {
-    name: 'Monica Hall',
-    url: 'https://example.com/monica.jpg'
+    name: 'Sebastian Jablonski',
+    url: 'https://i.ibb.co/VLz0y1r/62-A18-AEE-8-ABB-4661-B7-FC-96818-CC50-DD1.jpg'
   },
   {
-    name: 'Jared Dunn',
-    url: 'https://example.com/jared.jpg'
+    name: 'Oskar Gawryszewski',
+    url: 'https://i.ibb.co/2jSp1WW/65-B4-A638-923-B-4-E07-9-FA2-E29-F74-C8129-F.jpg'
   },
-  {
-    name: 'Dinesh Chugtai',
-    url: 'https://example.com/dinesh.jpg'
-  }
+
 ]
 
   const characters = db
@@ -45,16 +42,22 @@ function DashboardPage() {
     <>
     <div className="dashboard">
       <ChatContainer />
-      <div className="swiper-container">
+      <div className="swipe-container">
         <div className="card-container">
           {characters.map((character) =>
-          <TinderCard className='swipe' key={character.name} onSwipe={(dir) => swiped(dir, character.name)} onCardLeftScreen={() => outOfFrame(character.name)}>
+          <TinderCard 
+          className='swipe' 
+          key={character.name} 
+          onSwipe={(dir) => swiped(dir, character.name)} 
+          onCardLeftScreen={() => outOfFrame(character.name)}>
             <div style={{ backgroundImage: 'url(' + character.url + ')' }} className='card'>
               <h3>{character.name}</h3>
             </div>
           </TinderCard>
         )}
-
+        <div className="swipe-info">
+          {lastDirection ? <h2 className="info-text">You swiped {lastDirection}</h2> : <h2 className="info-text">Swipe a card or press a button to get started!</h2>}
+        </div>
         </div>
       </div>
     </div>
