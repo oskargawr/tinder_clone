@@ -3,9 +3,11 @@ import { Formik, Form, ErrorMessage, Field } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import { useCookies } from 'react-cookie';
 
 function AuthModalForm({isSignUp}) {
     const router = useRouter();
+    const [cookies, setCookie, removeCookie] = useCookies(['user']);
 
     const initialValues = {
         email: '',
@@ -26,6 +28,11 @@ function AuthModalForm({isSignUp}) {
                 console.log(res.data);
 
                 const success = res.status === 201;
+
+                setCookie('Email', res.data.email)
+                setCookie('UserId', res.data.userId)
+                setCookie('AuthToken', res.data.token)
+
 
                 if (success) {
                     router.push('/boarding');
