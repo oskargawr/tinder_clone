@@ -9,6 +9,7 @@ function HomePage() {
     const [isSignUp, setIsSignUp] = useState(true);
 
   const authToken = false;
+  
 
 
 
@@ -34,7 +35,6 @@ function HomePage() {
         </button>}
 
         {showModal && <AuthModal setShowModal={setShowModal} isSignUp={isSignUp} setIsSignUp={setIsSignUp}/>}
-
     </div>
     </div>
     </>

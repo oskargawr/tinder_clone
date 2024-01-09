@@ -6,3 +6,7 @@ dodalem bootstrapa, opisz go w dokumentacji
 rzeczy do ktorych wrocic pozniej:
 -dodac gdzies kontekst
 -podzielic ladnie scss
+
+zainstalowalem:
+-react-spring/web
+-react-tinder-card
