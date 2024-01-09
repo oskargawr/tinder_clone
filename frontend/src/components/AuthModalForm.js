@@ -2,8 +2,11 @@ import React from 'react'
 import { Formik, Form, ErrorMessage, Field } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 function AuthModalForm({isSignUp}) {
+    const router = useRouter();
+
     const initialValues = {
         email: '',
         password: '',
@@ -21,6 +24,12 @@ function AuthModalForm({isSignUp}) {
             try {
                 const res = await axios.post('http://localhost:8000/signup', values);
                 console.log(res.data);
+
+                const success = res.status === 201;
+
+                if (success) {
+                    router.push('/boarding');
+                }
             } catch (err) {
                 console.error(err);
             }
