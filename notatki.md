@@ -10,3 +10,4 @@ rzeczy do ktorych wrocic pozniej:
 zainstalowalem:
 -react-spring/web
 -react-tinder-card
+-jsonwebtoken, express, mongodb, dotenv, bcrypt, cors, uuid, bodyparser, nodemon
