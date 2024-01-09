@@ -1,6 +1,7 @@
 import React from 'react'
 import { Formik, Form, ErrorMessage, Field } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
 
 function AuthModalForm({isSignUp}) {
     const initialValues = {
@@ -15,8 +16,15 @@ function AuthModalForm({isSignUp}) {
         confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required('Required')
     })
 
-    const onSubmit = values => {
-        console.log(values)
+    const onSubmit = async (values) => {
+        if (isSignUp) {
+            try {
+                const res = await axios.post('http://localhost:8000/signup', values);
+                console.log(res.data);
+            } catch (err) {
+                console.error(err);
+            }
+        }
     }
   return (
     <Formik
