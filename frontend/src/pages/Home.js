@@ -10,9 +10,6 @@ function HomePage() {
 
   const authToken = false;
   
-
-
-
     const handleClick = () => {
         console.log('clicked')
         setShowModal(true);

@@ -18,10 +18,15 @@ function AuthModalForm({isSignUp}) {
     const validationSchema = Yup.object({
         email: Yup.string().email('Invalid email address').required('Required'),
         password: Yup.string().min(6, 'Must be 6 characters or more').required('Required'),
-        confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required('Required')
+        confirmPassword: Yup.string()
+            .when('isSignUp', {
+                is: true,
+                then: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required('Required'),
+            }),
     })
 
     const onSubmit = async (values) => {
+        console.log("klikam");
         if (isSignUp) {
             try {
                 const res = await axios.post('http://localhost:8000/signup', values);
@@ -33,9 +38,26 @@ function AuthModalForm({isSignUp}) {
                 setCookie('UserId', res.data.userId)
                 setCookie('AuthToken', res.data.token)
 
-
                 if (success) {
                     router.push('/boarding');
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        } else {
+            try {
+                console.log("jestem tutaj");
+                const res = await axios.post('http://localhost:8000/login', values);
+                console.log(res.data);
+
+                const success = res.status === 201;
+
+                setCookie('Email', res.data.email)
+                setCookie('UserId', res.data.userId)
+                setCookie('AuthToken', res.data.token)
+
+                if (success) {
+                    router.push('/dashboard');
                 }
             } catch (err) {
                 console.error(err);
