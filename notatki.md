@@ -11,3 +11,8 @@ zainstalowalem:
 -react-spring/web
 -react-tinder-card
 -jsonwebtoken, express, mongodb, dotenv, bcrypt, cors, uuid, bodyparser, nodemon
+-axios
+-react-cookie
+
+to do:
+    - napraw to ze te karty z tindera uciekaja i rozszerzaja strone

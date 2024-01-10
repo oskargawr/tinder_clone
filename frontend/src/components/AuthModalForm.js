@@ -26,7 +26,6 @@ function AuthModalForm({isSignUp}) {
     })
 
     const onSubmit = async (values) => {
-        console.log("klikam");
         if (isSignUp) {
             try {
                 const res = await axios.post('http://localhost:8000/signup', values);
@@ -34,7 +33,6 @@ function AuthModalForm({isSignUp}) {
 
                 const success = res.status === 201;
 
-                setCookie('Email', res.data.email)
                 setCookie('UserId', res.data.userId)
                 setCookie('AuthToken', res.data.token)
 
@@ -46,13 +44,11 @@ function AuthModalForm({isSignUp}) {
             }
         } else {
             try {
-                console.log("jestem tutaj");
                 const res = await axios.post('http://localhost:8000/login', values);
                 console.log(res.data);
 
                 const success = res.status === 201;
 
-                setCookie('Email', res.data.email)
                 setCookie('UserId', res.data.userId)
                 setCookie('AuthToken', res.data.token)
 

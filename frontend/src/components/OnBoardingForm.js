@@ -1,8 +1,15 @@
 import React, {useState} from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { useCookies } from 'react-cookie';
+import { useRouter } from 'next/router';
+import axios from 'axios';
+
 
 const RegistrationForm = () => {
+    const [cookies, setCookie, removeCookie] = useCookies(['user']);
+    const router = useRouter();
+
     const initialValues = {
         first_name: '',
         last_name: '',
@@ -15,6 +22,7 @@ const RegistrationForm = () => {
     };
 
     const [formData, setFormData] = useState({
+        user_id: '',
         first_name: '',
         last_name: '',
         dob: '',
@@ -49,20 +57,41 @@ const RegistrationForm = () => {
         location: Yup.string().required('Required'),
     });
 
-    const onSubmit = (values) => {
+    const onSubmit = async (values) => {
         console.log('Form data', values);
-        setFormData({
-            first_name: values.first_name,
-            last_name: values.last_name,
-            dob: values.dob,
-            gender: values.gender,
-            gender_interest: values.gender_interest,
-            img_url: values.img_url,
-            about: values.about,
-            location: values.location,
-            matches: [],
-        })
-        console.log('dane z form', formData);
+        // setFormData({
+        //     user_id: cookies.UserId,
+        //     first_name: values.first_name,
+        //     last_name: values.last_name,
+        //     dob: values.dob,
+        //     gender: values.gender,
+        //     gender_interest: values.gender_interest,
+        //     img_url: values.img_url,
+        //     about: values.about,
+        //     location: values.location,
+        //     matches: [],
+        // })
+        // console.log('dane z form', formData);
+
+        try {
+            const formData = {
+                ...values,
+                user_id: cookies.UserId,
+            }
+            console.log('dane z form', formData);
+            const res = await axios.put('http://localhost:8000/update_user', { ...values, user_id: cookies.UserId });
+            console.log(res.data);
+
+            const success = res.status === 201;
+
+            if (success) {
+                router.push('/dashboard');
+            } else {
+                console.log("err");
+            }
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     const handleImgUrlChange = (event, setFieldValue) => {

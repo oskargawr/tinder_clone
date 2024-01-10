@@ -28,7 +28,7 @@ recordRoutes.route('/signup').post(async function (req, res) {
             const sanitizedEmail = email.toLowerCase();
 
             const insertedUser = await db_connect.collection("users").insertOne({
-                _id: generatedUserId,
+                user_id: generatedUserId,
                 email: sanitizedEmail,
                 hashed_password: hashedPassword,
             });
@@ -37,7 +37,7 @@ recordRoutes.route('/signup').post(async function (req, res) {
                 expiresIn: '1h'
             })
 
-            res.status(201).json({ token: token, userId: insertedUser, email: sanitizedEmail })
+            res.status(201).json({ token: token, userId: generatedUserId })
         }
     }
     catch (err) {
@@ -86,7 +86,7 @@ recordRoutes.route('/login').post(async function (req, res) {
                     expiresIn: '1h'
                 })
 
-                res.status(201).json({ token: token, userId: existingUser._id, email: existingUser.email })
+                res.status(201).json({ token: token, userId: existingUser._id })
             }
         }
     }
@@ -99,10 +99,31 @@ recordRoutes.route('/login').post(async function (req, res) {
 recordRoutes.route('/update_user').put(async function (req, res) {
     let db_connect = dbo.getDb("tinder");
 
-    const formData = req.body.formData;
+    const formData = req.body;
+    console.log("form data:", formData);
 
     try {
         const query = { user_id: formData.user_id };
+        console.log("query:", query);
+        const updateDocument = {
+            $set: {
+                first_name: formData.first_name,
+                last_name: formData.last_name,
+                dob: formData.dob,
+                gender: formData.gender,
+                gender_interest: formData.gender_interest,
+                img_url: formData.img_url,
+                about: formData.about,
+                location: formData.location,
+                matches: formData.matches
+            }
+        }
+        const result = await db_connect.collection("users").updateOne(query, updateDocument);
+
+        const showUser = await db_connect.collection("users").findOne(query);
+        console.log("show user:", showUser);
+        res.json(result);
+
     }
     catch (err) {
         console.error(err);
