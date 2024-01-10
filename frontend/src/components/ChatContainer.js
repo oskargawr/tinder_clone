@@ -3,10 +3,10 @@ import ChatHeader from './ChatHeader';
 import MatchesDisplay from './MatchesDisplay';
 import ChatDisplay from './ChatDisplay';
 
-function ChatContainer() {
+function ChatContainer({user}) {
   return (
     <div className="chat-container">
-        <ChatHeader/>
+        <ChatHeader user={user}/>
 
         <div>
             <button className="option">Matches</button>

@@ -6,11 +6,7 @@ const ObjectId = require('mongodb').ObjectId;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 
-
-recordRoutes.route('/test').get((req, res) => {
-    res.send('hello');
-});
-
+// formularz rejestracji
 recordRoutes.route('/signup').post(async function (req, res) {
     let db_connect = dbo.getDb("tinder");
 
@@ -45,6 +41,7 @@ recordRoutes.route('/signup').post(async function (req, res) {
     }
 });
 
+// funkcja testowa - zwraca wszystkich użytkowników
 recordRoutes.route('/get_all_users').get(async function (req, res) {
     let db_connect = dbo.getDb("tinder");
     try {
@@ -55,6 +52,7 @@ recordRoutes.route('/get_all_users').get(async function (req, res) {
     }
 })
 
+// funkcja testowa - usuwa wszystkich użytkowników
 recordRoutes.route('/delete_all_users').delete(async function (req, res) {
     let db_connect = dbo.getDb("tinder");
     try {
@@ -65,6 +63,7 @@ recordRoutes.route('/delete_all_users').delete(async function (req, res) {
     }
 });
 
+// formularz logowania
 recordRoutes.route('/login').post(async function (req, res) {
     let db_connect = dbo.getDb("tinder");
 
@@ -86,7 +85,7 @@ recordRoutes.route('/login').post(async function (req, res) {
                     expiresIn: '1h'
                 })
 
-                res.status(201).json({ token: token, userId: existingUser._id })
+                res.status(201).json({ token: token, userId: existingUser.user_id })
             }
         }
     }
@@ -96,15 +95,14 @@ recordRoutes.route('/login').post(async function (req, res) {
 
 });
 
+// formularz rejestracji
 recordRoutes.route('/update_user').put(async function (req, res) {
     let db_connect = dbo.getDb("tinder");
 
     const formData = req.body;
-    console.log("form data:", formData);
 
     try {
         const query = { user_id: formData.user_id };
-        console.log("query:", query);
         const updateDocument = {
             $set: {
                 first_name: formData.first_name,
@@ -120,8 +118,6 @@ recordRoutes.route('/update_user').put(async function (req, res) {
         }
         const result = await db_connect.collection("users").updateOne(query, updateDocument);
 
-        const showUser = await db_connect.collection("users").findOne(query);
-        console.log("show user:", showUser);
         res.json(result);
 
     }
@@ -130,6 +126,23 @@ recordRoutes.route('/update_user').put(async function (req, res) {
     }
 });
 
+// znajdz uzytkownika - boarding
+recordRoutes.route('/get_user').get(async function (req, res) {
+    let db_connect = dbo.getDb("tinder");
+
+    const userId = req.query.userId;
+
+    try {
+        const query = { user_id: userId };
+        const result = await db_connect.collection("users").findOne(query);
+
+        res.send(result);
+
+    }
+    catch (err) {
+        console.error(err);
+    }
+});
 
 
 module.exports = recordRoutes;

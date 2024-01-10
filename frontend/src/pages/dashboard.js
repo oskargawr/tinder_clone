@@ -1,9 +1,34 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import ChatContainer from '../components/ChatContainer'
 import TinderCard from 'react-tinder-card'
 import '../style/index.scss';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
+import { AuthProvider } from '../context/AuthContext.js';
+
 
 function DashboardPage() {
+  const [user, setUser] = useState({});
+  const [cookies, setCookie, removeCookie] = useCookies(['user']);
+  const userId = cookies.UserId;
+
+  const getUser = async () => {
+    try {
+      const res = await axios.get('http://localhost:8000/get_user', {
+        params: { userId }
+      });
+      setUser(res.data)
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  useEffect(() => {
+    getUser();
+    // console.log(user);
+  }, [user]);
+
+
 
   const db = [
   {
@@ -41,7 +66,7 @@ function DashboardPage() {
   return (
     <>
     <div className="dashboard">
-      <ChatContainer />
+      <ChatContainer user={user}/>
       <div className="swipe-container">
         <div className="card-container">
           {characters.map((character) =>
@@ -65,4 +90,10 @@ function DashboardPage() {
   )
 }
 
-export default DashboardPage
+const DashboardWithAuth = () => (
+  <AuthProvider>
+    <DashboardPage />
+  </AuthProvider>
+)
+
+export default DashboardWithAuth

@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import Nav from '../components/Nav.js'
 import RegistrationForm from '../components/OnBoardingForm.js'
 import '../style/index.scss';
+import { AuthProvider } from '../context/AuthContext.js';
 
 function Boarding() {
   return (
@@ -19,4 +20,10 @@ function Boarding() {
   )
 }
 
-export default Boarding
+const BoardingWithAuth = () => (
+  <AuthProvider>
+    <Boarding />
+  </AuthProvider>
+);
+
+export default BoardingWithAuth

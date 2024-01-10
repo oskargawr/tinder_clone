@@ -59,19 +59,6 @@ const RegistrationForm = () => {
 
     const onSubmit = async (values) => {
         console.log('Form data', values);
-        // setFormData({
-        //     user_id: cookies.UserId,
-        //     first_name: values.first_name,
-        //     last_name: values.last_name,
-        //     dob: values.dob,
-        //     gender: values.gender,
-        //     gender_interest: values.gender_interest,
-        //     img_url: values.img_url,
-        //     about: values.about,
-        //     location: values.location,
-        //     matches: [],
-        // })
-        // console.log('dane z form', formData);
 
         try {
             const formData = {
