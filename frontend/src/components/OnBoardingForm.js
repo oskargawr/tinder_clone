@@ -82,7 +82,8 @@ const RegistrationForm = () => {
             const res = await axios.put('http://localhost:8000/update_user', { ...values, user_id: cookies.UserId });
             console.log(res.data);
 
-            const success = res.status === 201;
+            console.log(res.status);
+            const success = res.status === 200;
 
             if (success) {
                 router.push('/dashboard');
