@@ -6,23 +6,23 @@ const client = new MongoClient(Db, {
     useUnifiedTopology: true,
 });
 
-var _db;
+let _db;
 
 module.exports = {
-    connectToServer: function (callback) {
-        client.connect(function (err, db) {
-            if (err) {
-                console.error(err);
-            }
-            if (db)
-            {
-                _db = db.db("tinder");
-                console.log("Successfully connected to MongoDB.");
-            }
+    connectToServer: async function (callback) {
+        try {
+            await client.connect();
+            _db = client.db("tinder");
+            console.log("Successfully connected to MongoDB.");
             if (callback) {
-                return callback(err)
+                callback(null);
             }
-        });
+        } catch (err) {
+            console.error(err);
+            if (callback) {
+                callback(err);
+            }
+        }
     },
 
     getDb: function () {
