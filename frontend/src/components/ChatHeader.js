@@ -1,13 +1,15 @@
 import React from 'react'
 import { useCookies } from 'react-cookie'
+import { useRouter } from 'next/router'
 
 function ChatHeader({user}) {
   const [cookies, setCookie, removeCookie] = useCookies(['user']);
+  const router = useRouter();
 
   const logout = () => {
     removeCookie('UserId', cookies.UserId);
     removeCookie('AuthToken', cookies.AuthToken);
-    window.location.reload();
+    router.push('/');
   }
   return (
     <div className="chat-container-header">

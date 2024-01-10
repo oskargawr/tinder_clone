@@ -26,4 +26,4 @@ const BoardingWithAuth = () => (
   </AuthProvider>
 );
 
-export default BoardingWithAuth
+export default BoardingWithAuth;

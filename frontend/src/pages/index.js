@@ -1,15 +1,14 @@
-// App.js
 import React from 'react';
 import HomePage from './Home';
 import DashboardPage from './dashboard';
 import Boarding from './boarding';
-import { AuthProvider, useAuth } from '../context/AuthContext'; // Import useAuth
+import { AuthProvider, useAuth } from '../context/AuthContext';
 import { useRouter } from 'next/router';
 import '../style/index.scss';
 
 function App() {
   const { isAuthenticated } = useAuth();
-  const router = useRouter(); // Dodaj router tutaj, aby był dostępny w całej funkcji.
+  const router = useRouter();
   let Component;
 
   switch (router.pathname) {

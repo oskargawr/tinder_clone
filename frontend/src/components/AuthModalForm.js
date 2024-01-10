@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Formik, Form, ErrorMessage, Field } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
@@ -25,41 +25,49 @@ function AuthModalForm({isSignUp}) {
             }),
     })
 
-    const onSubmit = async (values) => {
+    const onSubmit = (values) => {
         if (isSignUp) {
-            try {
-                const res = await axios.post('http://localhost:8000/signup', values);
-                console.log(res.data);
-
-                const success = res.status === 201;
-
-                setCookie('UserId', res.data.userId)
-                setCookie('AuthToken', res.data.token)
-
-                if (success) {
-                    router.push('/boarding');
-                }
-            } catch (err) {
-                console.error(err);
-            }
+          axios
+            .post('http://localhost:8000/signup', values)
+            .then((res) => {
+              console.log(res.data);
+            
+              const success = res.status === 201;
+              console.log("sukces:" + res.status);
+            
+              setCookie('UserId', res.data.userId);
+              setCookie('AuthToken', res.data.token);
+            
+              if (success) {
+                console.log("sukces");
+                router.push('/boarding');
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+              // Tutaj możesz obsłużyć błąd i podjąć odpowiednie kroki, na przykład powtórzyć żądanie fetch
+            });
         } else {
-            try {
-                const res = await axios.post('http://localhost:8000/login', values);
-                console.log(res.data);
-
-                const success = res.status === 201;
-
-                setCookie('UserId', res.data.userId)
-                setCookie('AuthToken', res.data.token)
-
-                if (success) {
-                    router.push('/dashboard');
-                }
-            } catch (err) {
-                console.error(err);
-            }
+          axios
+            .post('http://localhost:8000/login', values)
+            .then((res) => {
+              console.log(res.data);
+            
+              const success = res.status === 201;
+            
+              setCookie('UserId', res.data.userId);
+              setCookie('AuthToken', res.data.token);
+            
+              if (success) {
+                router.push('/dashboard');
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+              // Tutaj możesz obsłużyć błąd i podjąć odpowiednie kroki
+            });
         }
-    }
+};
   return (
     <Formik
             initialValues={initialValues}

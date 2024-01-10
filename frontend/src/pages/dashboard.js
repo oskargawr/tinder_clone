@@ -10,6 +10,7 @@ import { AuthProvider } from '../context/AuthContext.js';
 function DashboardPage() {
   const [user, setUser] = useState({});
   const [cookies, setCookie, removeCookie] = useCookies(['user']);
+  const [genderedUsers, setGenderedUsers] = useState(null);
   const userId = cookies.UserId;
 
   const getUser = async () => {
@@ -23,10 +24,21 @@ function DashboardPage() {
     }
   }
 
+  const getGenderedUsers = async () => {
+    try {
+      const res = await axios.get('http://localhost:8000/get_gendered_users', {
+        params: { gender: user?.gender_interest }
+      });
+      setGenderedUsers(res.data);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   useEffect(() => {
     getUser();
-    // console.log(user);
-  }, [user]);
+    // getGenderedUsers();
+  }, [user, genderedUsers]);
 
 
 
@@ -96,4 +108,4 @@ const DashboardWithAuth = () => (
   </AuthProvider>
 )
 
-export default DashboardWithAuth
+export default DashboardWithAuth;

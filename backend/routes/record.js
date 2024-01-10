@@ -144,5 +144,22 @@ recordRoutes.route('/get_user').get(async function (req, res) {
     }
 });
 
+// dopasuj uzytkownikow na podstawie plci
+recordRoutes.route('/gendered_users').get(async function (req, res) {
+    let db_connect = dbo.getDb("tinder");
+
+    const pref_gender = req.query.gender;
+
+    try {
+        const query = { gender: pref_gender };
+        const result = await db_connect.collection("users").find(query).toArray();
+
+        res.send(result);
+    } catch (err) {
+        console.error(err);
+    }
+});
+
+
 
 module.exports = recordRoutes;
