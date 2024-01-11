@@ -25,54 +25,49 @@ function AuthModalForm({isSignUp}) {
             }),
     })
 
-    const onSubmit = (values) => {
+    const onSubmit = async (values, router) => {
         if (isSignUp) {
-          axios
-            .post('http://localhost:8000/signup', values)
-            .then((res) => {
-              console.log(res.data);
-            
-              const success = res.status === 201;
-              console.log("sukces:" + res.status);
-            
-              setCookie('UserId', res.data.userId);
-              setCookie('AuthToken', res.data.token);
-            
-              if (success) {
-                console.log("sukces");
-                router.push('/boarding');
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-              // Tutaj możesz obsłużyć błąd i podjąć odpowiednie kroki, na przykład powtórzyć żądanie fetch
-            });
+            try {
+                const res = await axios.post('http://localhost:8000/signup', values);
+                console.log(res.data);
+
+                const success = res.status === 201;
+                console.log("sukces:" + res.status);
+
+                setCookie('UserId', res.data.userId)
+                setCookie('AuthToken', res.data.token)
+
+                if (success) {
+                    console.log("sukces");
+                    router.push('/boarding');
+                }
+            } catch (err) {
+                console.error(err);
+            }
         } else {
-          axios
-            .post('http://localhost:8000/login', values)
-            .then((res) => {
-              console.log(res.data);
-            
-              const success = res.status === 201;
-            
-              setCookie('UserId', res.data.userId);
-              setCookie('AuthToken', res.data.token);
-            
-              if (success) {
-                router.push('/dashboard');
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-              // Tutaj możesz obsłużyć błąd i podjąć odpowiednie kroki
-            });
+            try {
+                const res = await axios.post('http://localhost:8000/login', values);
+                console.log(res.data);
+
+                const success = res.status === 201;
+
+
+                setCookie('UserId', res.data.userId)
+                setCookie('AuthToken', res.data.token)
+
+                if (success) {
+                    router.push('/dashboard');
+                }
+            } catch (err) {
+                console.error(err);
+            }
         }
-};
+    }
   return (
     <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={onSubmit}
+            onSubmit={(values) => onSubmit(values, router)}
           >
               <Form className='register-form'>
                   <div className='input-wrapper'>

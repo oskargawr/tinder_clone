@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
     } else {
       setIsAuthenticated(true);
     }
-  }, [authToken, router]);
+  }, [authToken, router.asPath]);
 
   return (
     <AuthContext.Provider value={{ isAuthenticated }}>
