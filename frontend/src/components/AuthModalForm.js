@@ -38,7 +38,6 @@ function AuthModalForm({isSignUp}) {
                 setCookie('AuthToken', res.data.token)
 
                 if (success) {
-                    console.log("sukces");
                     router.push('/boarding');
                 }
             } catch (err) {

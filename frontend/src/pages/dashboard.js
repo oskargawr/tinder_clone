@@ -11,6 +11,8 @@ function DashboardPage() {
   const [user, setUser] = useState({});
   const [cookies, setCookie, removeCookie] = useCookies(['user']);
   const [genderedUsers, setGenderedUsers] = useState(null);
+  const [lastDirection, setLastDirection] = useState()
+
   const userId = cookies.UserId;
 
   const getUser = async () => {
@@ -26,47 +28,79 @@ function DashboardPage() {
 
   const getGenderedUsers = async () => {
     try {
-      const res = await axios.get('http://localhost:8000/get_gendered_users', {
+      const res = await axios.get('http://localhost:8000/gendered_users', {
         params: { gender: user?.gender_interest }
       });
       setGenderedUsers(res.data);
+      // console.log(res.data)
     } catch (err) {
       console.error(err);
     }
   }
 
-  useEffect(() => {
-    getUser();
-    // getGenderedUsers();
-  }, [user, genderedUsers]);
+  // useEffect(() => {
+  //   getUser();
+  //   // getGenderedUsers();
+  // }, [user, genderedUsers]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [userData, generedUsersData] = await Promise.all([
+          axios.get('http://localhost:8000/get_user', { params: { userId } }),
+          axios.get('http://localhost:8000/gendered_users', { params: { gender: user?.gender_interest } })
+        ]);
+        setUser(userData.data);
+        setGenderedUsers(generedUsersData.data);
+        // console.log(generedUsersData.data);
+      } catch (err) {
+        console.error(err);
+      }
+  }
+  fetchData();
+  }, [userId, user]);
 
 
   const db = [
   {
-    name: 'Agata Bartczak',
-    url: 'https://i.ibb.co/LSLZBBt/agata.jpg'
+    first_name: 'Agata Bartczak',
+    img_url: 'https://i.ibb.co/LSLZBBt/agata.jpg'
   },
   {
-    name: 'Szymon Grabski',
-    url: 'https://i.ibb.co/rckDXbC/szymon.jpg'
+    first_name: 'Szymon Grabski',
+    img_url: 'https://i.ibb.co/rckDXbC/szymon.jpg'
   },
   {
-    name: 'Sebastian Jablonski',
-    url: 'https://i.ibb.co/VLz0y1r/62-A18-AEE-8-ABB-4661-B7-FC-96818-CC50-DD1.jpg'
+    first_name: 'Sebastian Jablonski',
+    img_url: 'https://i.ibb.co/VLz0y1r/62-A18-AEE-8-ABB-4661-B7-FC-96818-CC50-DD1.jpg'
   },
   {
-    name: 'Oskar Gawryszewski',
-    url: 'https://i.ibb.co/2jSp1WW/65-B4-A638-923-B-4-E07-9-FA2-E29-F74-C8129-F.jpg'
+    first_name: 'Oskar Gawryszewski',
+    img_url: 'https://i.ibb.co/2jSp1WW/65-B4-A638-923-B-4-E07-9-FA2-E29-F74-C8129-F.jpg'
   },
 
 ]
 
-  const characters = db
-  const [lastDirection, setLastDirection] = useState()
+  const characters = genderedUsers || db;
 
-  const swiped = (direction, nameToDelete) => {
-    console.log('removing: ' + nameToDelete)
+  const updateMatches = async (matchedUserId) => {
+    try {
+      const res = await axios.put('http://localhost:8000/add_match', {
+        userId,
+        matchedUserId
+      });
+      getUser();
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  // console.log(characters);
+
+  const swiped = (direction, swipedUserId) => {
+    if (direction === 'right') {
+      updateMatches(swipedUserId);
+    }
     setLastDirection(direction)
   }
 
@@ -81,14 +115,14 @@ function DashboardPage() {
       <ChatContainer user={user}/>
       <div className="swipe-container">
         <div className="card-container">
-          {characters.map((character) =>
+          {characters && characters?.map((character) =>
           <TinderCard 
           className='swipe' 
-          key={character.name} 
-          onSwipe={(dir) => swiped(dir, character.name)} 
-          onCardLeftScreen={() => outOfFrame(character.name)}>
-            <div style={{ backgroundImage: 'url(' + character.url + ')' }} className='card'>
-              <h3>{character.name}</h3>
+          key={character.user_id} 
+          onSwipe={(dir) => swiped(dir, character.user_id)} 
+          onCardLeftScreen={() => outOfFrame(character.first_name)}>
+            <div style={{ backgroundImage: 'url(' + character.img_url + ')' }} className='card'>
+              <h3>{character.first_name}</h3>
             </div>
           </TinderCard>
         )}
