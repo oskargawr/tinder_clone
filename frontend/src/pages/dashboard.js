@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import ChatContainer from '../components/ChatContainer'
 import TinderCard from 'react-tinder-card'
 import '../style/index.scss';
@@ -38,27 +38,18 @@ function DashboardPage() {
     }
   }
 
-  // useEffect(() => {
-  //   getUser();
-  //   // getGenderedUsers();
-  // }, [user, genderedUsers]);
+  useEffect(() => {
+    getUser();
+  }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [userData, generedUsersData] = await Promise.all([
-          axios.get('http://localhost:8000/get_user', { params: { userId } }),
-          axios.get('http://localhost:8000/gendered_users', { params: { gender: user?.gender_interest } })
-        ]);
-        setUser(userData.data);
-        setGenderedUsers(generedUsersData.data);
-        // console.log(generedUsersData.data);
-      } catch (err) {
-        console.error(err);
-      }
-  }
-  fetchData();
-  }, [userId, user]);
+    if (user) {
+      getGenderedUsers();
+    }
+  }, [user]);
+
+
+  console.log(genderedUsers)
 
 
   const db = [
@@ -94,8 +85,6 @@ function DashboardPage() {
       console.error(err);
     }
   }
-
-  // console.log(characters);
 
   const swiped = (direction, swipedUserId) => {
     if (direction === 'right') {
