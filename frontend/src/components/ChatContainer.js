@@ -13,7 +13,7 @@ function ChatContainer({user}) {
             <button className="option">Chat</button>
         </div>
 
-        <MatchesDisplay/>
+        <MatchesDisplay matches={user.matches}/>
         <ChatDisplay/>
     </div>
   )

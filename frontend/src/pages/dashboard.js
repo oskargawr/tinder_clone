@@ -8,7 +8,7 @@ import { AuthProvider } from '../context/AuthContext.js';
 
 
 function DashboardPage() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const [cookies, setCookie, removeCookie] = useCookies(['user']);
   const [genderedUsers, setGenderedUsers] = useState(null);
   const [lastDirection, setLastDirection] = useState()
@@ -72,7 +72,7 @@ function DashboardPage() {
 
 ]
 
-  const characters = genderedUsers || db;
+  const characters = genderedUsers;
 
   const updateMatches = async (matchedUserId) => {
     try {
@@ -97,14 +97,23 @@ function DashboardPage() {
     console.log(name + ' left the screen!')
   }
 
+  const matchedUserIds = user?.matches.map(({user_id}) => user_id).concat(userId);
+
+  const filteredGenderedUsers = genderedUsers?.filter(
+    genderedUsers => !matchedUserIds.includes(genderedUsers.user_id)
+  )
+
+  // console.log("gendered users: ", genderedUsers);
+  // console.log("filtered gendered users: ", filteredGenderedUsers);
 
   return (
     <>
+    { user &&
     <div className="dashboard">
       <ChatContainer user={user}/>
       <div className="swipe-container">
         <div className="card-container">
-          {characters && characters?.map((character) =>
+          {filteredGenderedUsers?.map((character) =>
           <TinderCard 
           className='swipe' 
           key={character.user_id} 
@@ -121,6 +130,7 @@ function DashboardPage() {
         </div>
       </div>
     </div>
+}
     </>
   )
 }
