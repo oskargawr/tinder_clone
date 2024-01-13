@@ -113,7 +113,7 @@ recordRoutes.route('/update_user').put(async function (req, res) {
                 img_url: formData.img_url,
                 about: formData.about,
                 location: formData.location,
-                matches: formData.matches
+                matches: []
             }
         }
         const result = await db_connect.collection("users").updateOne(query, updateDocument);
@@ -149,6 +149,7 @@ recordRoutes.route('/gendered_users').get(async function (req, res) {
     let db_connect = dbo.getDb("tinder");
 
     const pref_gender = req.query.gender;
+    console.log(pref_gender);
 
     try {
         const query = { gender: pref_gender };
@@ -160,6 +161,135 @@ recordRoutes.route('/gendered_users').get(async function (req, res) {
     }
 });
 
+// dodaj dopasowanie
+recordRoutes.route('/add_match').put(async function (req, res) {
+    let db_connect = dbo.getDb("tinder");
 
+    const { userId, matchedUserId } = req.body;
+
+    try {
+        const query = { user_id: userId };
+        const updateDocument = {
+            $push: {
+                matches: {
+                    user_id: matchedUserId,
+                }
+            }
+        }
+        const result = await db_connect.collection("users").updateOne(query, updateDocument);
+
+        res.json(result);
+
+    }
+    catch (err) {
+        console.error(err);
+    }
+});
+
+// znajdz dopasowania
+recordRoutes.route('/users').get(async function (req, res) {
+    let db_connect = dbo.getDb("tinder");
+
+    const userIds = JSON.parse(req.query.userIds);
+    // console.log("userIds: ", userIds);
+
+    try {
+        const pipeline = [
+            {
+                '$match': {
+                    'user_id': {
+                        '$in': userIds
+                    }
+                }
+            },
+            {
+                '$unwind': '$matches'
+            },
+            {
+                '$lookup': {
+                    'from': 'users',
+                    'localField': 'matches.user_id',
+                    'foreignField': 'user_id',
+                    'as': 'matchedUser'
+                }
+            },
+            {
+                '$unwind': '$matchedUser'
+            },
+            {
+                '$group': {
+                    '_id': '$_id',
+                    'user_id': { '$first': '$user_id' },
+                    'email': { '$first': '$email' },
+                    'about': { '$first': '$about' },
+                    'dob': { '$first': '$dob' },
+                    'first_name': { '$first': '$first_name' },
+                    'gender': { '$first': '$gender' },
+                    'gender_interest': { '$first': '$gender_interest' },
+                    'img_url': { '$first': '$img_url' },
+                    'last_name': { '$first': '$last_name' },
+                    'location': { '$first': '$location' },
+                    'matches': { '$push': '$matchedUser' } 
+                }
+            }
+        ];
+        const result = await db_connect.collection("users").aggregate(pipeline).toArray();
+
+        res.send(result);
+    } catch (err) {
+        console.error(err);
+    }
+});
+
+// znajdz wiadomosci
+recordRoutes.route('/messages').get(async function (req, res) {
+    let db_connect = dbo.getDb("tinder");
+
+    const userId = req.query.userId;
+    const correspondingUserId = req.query.correspondingUserId;
+
+    try {
+        const query = { from_userId: userId, to_userId: correspondingUserId };
+        const result = await db_connect.collection("messages").find(query).toArray();
+
+        // const messages = result.matches.find(({ user_id }) => user_id === correspondingUserId).messages;
+
+        res.send(result);
+    } catch (err) {
+        console.error(err);
+    }
+});
+
+// wyslij wiadomosc
+recordRoutes.route('/message').post(async function (req, res) {
+    let db_connect = dbo.getDb("tinder");
+
+    const { timestamp, from_userId, to_userId, message } = req.body;
+    console.log("message: ", message, "from_userId: ", from_userId, "to_userId: ", to_userId);
+
+    try {
+        const result = await db_connect.collection("messages").insertOne({
+            timestamp: timestamp,
+            from_userId: from_userId,
+            to_userId: to_userId,
+            message: message
+        });
+
+        res.json(result);
+    } catch (err) {
+        console.error(err);
+    }
+});
+
+// funkcja testowa - pokaz wszystkie wiadomosci
+recordRoutes.route('/get_all_messages').get(async function (req, res) {
+    let db_connect = dbo.getDb("tinder");
+    try {
+        let result = await db_connect.collection("messages").find().toArray();
+        res.json(result);
+    } catch (err) {
+        console.error(err);
+    }
+})
 
 module.exports = recordRoutes;

@@ -103,8 +103,8 @@ function DashboardPage() {
     genderedUsers => !matchedUserIds.includes(genderedUsers.user_id)
   )
 
-  // console.log("gendered users: ", genderedUsers);
-  // console.log("filtered gendered users: ", filteredGenderedUsers);
+  console.log("gendered users: ", genderedUsers);
+  console.log("filtered gendered users: ", filteredGenderedUsers);
 
   return (
     <>
