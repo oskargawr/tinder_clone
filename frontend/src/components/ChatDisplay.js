@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Chat from './Chat';
 import ChatInput from './ChatInput';
 import axios from 'axios';
+import { FaTrash } from 'react-icons/fa';
 
 function ChatDisplay({user, clickedUser}) {
   const [userMessages, setUserMessages] = useState(null);
@@ -19,7 +20,7 @@ function ChatDisplay({user, clickedUser}) {
     } catch (err) {
       console.log(err);
   }
-}
+};
 
   const getClickedUsersMessages = async () => {
     try {
@@ -30,7 +31,18 @@ function ChatDisplay({user, clickedUser}) {
     } catch (err) {
       console.log(err);
   }
-}
+};
+
+//   const deleteMessage = async (messageId) => {
+//     try {
+//       const res = await axios.delete(`http://localhost:8000/messages/${messageId}`);
+//       getUserMessages();
+//       getClickedUsersMessages();
+//     } catch (err) {
+//       console.log(err);
+//   }
+// };
+
   
   useEffect(() => {
     getUserMessages();
@@ -45,6 +57,8 @@ function ChatDisplay({user, clickedUser}) {
     formatedMessage['img'] = user?.img_url;
     formatedMessage['message'] = message.message;
     formatedMessage['timestamp'] = message.timestamp;
+    formatedMessage['from_userId'] = message.from_userId;
+    formatedMessage['_id'] = message._id;
 
     messages.push(formatedMessage);
   });
@@ -55,22 +69,17 @@ function ChatDisplay({user, clickedUser}) {
     formatedMessage['img'] = clickedUser?.img_url;
     formatedMessage['message'] = message.message;
     formatedMessage['timestamp'] = message.timestamp;
+    formatedMessage['from_userId'] = message.from_userId;
+    formatedMessage['_id'] = message._id;
 
     messages.push(formatedMessage);
   });
 
-  console.log("messages: ", userMessages, clickedUsersMessages);
-
-  console.log("message timestamp: ", messages.timestamp);
-  console.log("messages: ", messages)
   const descendingOrderMessages = messages.sort((a, b) => a.timestamp.localeCompare(b.timestamp));
-
-  console.log("descending: ", descendingOrderMessages);
 
   return (
     <>
-        <Chat descendingOrderMessages={descendingOrderMessages}/>
-        <p>{clickedUser.first_name}</p>
+        <Chat descendingOrderMessages={descendingOrderMessages} getUserMessages={getUserMessages} getClickedUsersMessages={getClickedUsersMessages}/>
         <ChatInput user={user} clickedUser={clickedUser} getUserMessages={getUserMessages} getClickedUsersMessages={getClickedUsersMessages}/>
     </>
   )

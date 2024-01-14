@@ -5,14 +5,12 @@ import whiteLogo from '../images/Daco_1866030.png';
 import colorLogo from "../images/Daco_5943364.png";
 import Image from 'next/image'
 
-function Nav({minimal, setShowModal, showModal, setIsSignUp}) {
+function Nav({authToken, minimal, setShowModal, showModal, setIsSignUp}) {
 
   const handleClick = () => {
     setShowModal(true)
     setIsSignUp(false)
   }
-
-  const authToken = false;
 
   return (
     <nav>

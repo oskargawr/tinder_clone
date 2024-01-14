@@ -88,13 +88,6 @@ nav {
     margin: 0.3em 0;
 }
 
-// .home {
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//     align-items: center;
-// }
-
 // auth-modal
 
 .auth-modal-wrapper {
@@ -225,7 +218,6 @@ nav {
         display: flex;
         gap: 0.3em;
         width: 800px;
-        // border: solid 1px;
 
         .left-side-form {
             display: flex;
@@ -233,7 +225,6 @@ nav {
             align-items: flex-start;
             gap: 0.3em;
             width: 400px;
-            // border: solid 1px;
 
             input, select, textarea {
                 width: 300px;
@@ -265,7 +256,6 @@ nav {
         }
 
         .photo-section {
-            // border: solid 1px;
             flex-grow: 1;
             align-items: flex-end;
 
@@ -330,6 +320,7 @@ nav {
     .card-container {
      width: 400px;
      height: 650px;
+     position: relative;
     }
 
     .card {
@@ -340,18 +331,14 @@ nav {
      background-position: center;
     }
 
-    .cardContent {
-      width: 100%;
-      height: 100%;
-    }
-
     .card h3 {
       margin-top: 0;
     }
 
     .swipe-info {
+        left: 20%;
         position: absolute;
-        bottom: 0;
+        top: 700px;
         padding: 10px;
         h2 {
             color: black;
@@ -377,6 +364,7 @@ nav {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,;
     }
 
     button.option {
@@ -399,6 +387,10 @@ nav {
         align-items: center;
         padding: 20px;
         color: white;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
 
@@ -423,8 +415,50 @@ nav {
     padding: 20px;
     height: 60vh;
     overflow-y: auto;
-}
 
+    .chat-message-container{
+        display: flex;
+        flex-direction: column;
+        gap: 0.3em;
+        padding: 10px;
+        margin-bottom: 0.3em;
+        border-radius: 10px;
+        background-color: rgb(245, 245, 245);
+        width: 90%;
+
+        .chat-message {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3em;
+        }
+
+        .name-and-icon {
+            display: flex;
+            width: 80%;
+            justify-content: space-between;
+            align-items: center;
+
+            .delete-message-icon {
+                color: rgb(187, 187, 187);
+        
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .chat-message-header {
+        display: flex;
+        
+        .chat-name {
+            font-weight: 600;
+            align-self: center;
+        }
+
+
+    }
+}
 .chat-input {
     padding: 20px;
     display: flex;
@@ -448,27 +482,34 @@ nav {
     flex-direction: column;
 
     .matches-display {
-        width: 400px;
+        width: 90%;
         display: flex;
-        justify-self: center;
+        justify-content: center;
         flex-wrap: wrap;
-
+        gap: 0.3em;
 
         .match-card {
-            // width: 100%;
-            height: 150px;
-            flex: 0 0 32.33333%;
-            margin: 0.1em;
+            height: 175px;
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
             .img-container {
                 height: 100%;
                 width: 100%;
-
+                overflow: hidden;
                 img {
+                    height: 100%;
+                    width: 100%;
                     object-fit: cover;
                 }
+            }
+
+            p {
+                font-size: 0.8em;
+                font-weight: 600;
             }
         }
     }
 }
-

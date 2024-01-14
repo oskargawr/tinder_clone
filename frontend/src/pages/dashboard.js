@@ -120,7 +120,11 @@ function DashboardPage() {
           onSwipe={(dir) => swiped(dir, character.user_id)} 
           onCardLeftScreen={() => outOfFrame(character.first_name)}>
             <div style={{ backgroundImage: 'url(' + character.img_url + ')' }} className='card'>
-              <h3>{character.first_name}</h3>
+              <div className="card-info-content">
+                <h3>{character.first_name} {character.last_name}</h3>
+                <p>{character.location}</p>
+                <p>{character.about}</p>
+              </div>
             </div>
           </TinderCard>
         )}
