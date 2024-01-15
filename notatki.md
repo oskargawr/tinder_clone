@@ -13,6 +13,7 @@ zainstalowalem:
 -jsonwebtoken, express, mongodb, dotenv, bcrypt, cors, uuid, bodyparser, nodemon
 -axios
 -react-cookie
+-react-icons/fa
 
 to do:
     // frontend
@@ -23,10 +24,12 @@ to do:
     - wcisnij gdzies useLayoutEffect, useMemo, useRef i reducera
     - wystyluj jakies rzeczy tailwindem czy cos
     - zmien nazwy plikow na jsx
-    - dodaj mozliwosc usuniecia konta
+    <!-- - dodaj mozliwosc usuniecia konta -->
     <!-- - edycja historii czatow --> /// dalem tylko mozliwosc usuniecia
     - edycja matchow
     - kopia zapasowa profilu i mozliwosc importu
+    - wystyluj karte tindera
+    -napraw wyszukiwanie both plci
 
     // backend
     - przerob jakies funkcje na promise

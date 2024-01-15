@@ -18,11 +18,11 @@ function HomePage() {
       if (authToken) {
             removeCookie('UserId', cookies.UserId);
             removeCookie('AuthToken', cookies.AuthToken);
-            window.location.reload();
             setAuthToken(false);
+        } else {
+          setShowModal(true);
+          setIsSignUp(true);
         }
-        setShowModal(true);
-        setIsSignUp(true);
 
         
     }

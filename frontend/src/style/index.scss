@@ -382,7 +382,11 @@ nav {
         border-bottom: solid 4px rgb(187, 187, 187);
     }
 
-    .profile, i.log-out-icon {
+    .action-buttons {
+        display: flex;
+    }
+
+    .profile, i.log-out-icon, i.delete-account-icon, i.edit-account-info {
         display: flex;
         align-items: center;
         padding: 20px;

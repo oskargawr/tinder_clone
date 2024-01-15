@@ -308,4 +308,20 @@ recordRoutes.route('/messages/:id').delete(async function (req, res) {
     }
 });
 
+// usun uzytkownika
+recordRoutes.route('/delete_user/:id').delete(async function (req, res) {
+    let db_connect = dbo.getDb("tinder");
+
+    const userId = req.params.id;
+
+    try {
+        const query = { user_id: userId };
+        const result = await db_connect.collection("users").deleteOne(query);
+
+        res.json(result);
+    } catch (err) {
+        console.error(err);
+    }
+});
+
 module.exports = recordRoutes;
