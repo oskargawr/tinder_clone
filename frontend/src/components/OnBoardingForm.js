@@ -126,7 +126,7 @@ const RegistrationForm = () => {
                     <option value=''>Interested in</option>
                     <option value='male'>Male</option>
                     <option value='female'>Female</option>
-                    <option value='both'>Both</option>
+                    {/* <option value='both'>Both</option> */}
                 </Field>
                 <ErrorMessage name='gender_interest' component="div" className="error-message"/>
                 </div>
@@ -152,7 +152,7 @@ const RegistrationForm = () => {
                 <ErrorMessage name='img_url' component="div" className="error-message"/>
                 </div>
                 <div className="photo-container">
-                    <img src={formData.img_url} alt="User Image" />
+                    <img src={formData.img_url} alt="Image Preview" />
                 </div>
                 </section>
                 </div>

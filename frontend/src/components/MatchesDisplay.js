@@ -27,8 +27,10 @@ function MatchesDisplay({matches, setClickedUser}) {
     }
   }, [matches]);
 
-  const filteredMatchedProfiles = matchedProfiles?.filter(profile => profile.user_id == userId).length > 0 ? matchedProfiles?.filter(profile => profile.user_id != userId) : matchedProfiles;
-
+  const filteredMatchedProfiles = matchedProfiles?.filter(
+    (matchedProfile) => 
+      matchedProfile.matches.filter((profile) => profile.user_id === userId).length > 0
+  ).sort((a, b) => a.first_name.localeCompare(b.first_name));
   return (
     <div className="matches-display">
         {filteredMatchedProfiles?.map((match, _index) => {

@@ -21,7 +21,7 @@ to do:
     <!-- - napraw to ze trzeba odswiezyc strone zeby zobaczyc matches -->
     <!-- - napraw matches: dwie osoby musza siebie nawzajem dodac zeby bylo match -->
     - dodaj mozliwosc edycji danych w profliu
-    - wcisnij gdzies useLayoutEffect, useMemo, useRef i reducera
+    - wcisnij gdzies useLayoutEffect, useMemo, useRef i reducera // useLayout mam, useRef mam
     - wystyluj jakies rzeczy tailwindem czy cos
     - zmien nazwy plikow na jsx
     <!-- - dodaj mozliwosc usuniecia konta -->
@@ -34,3 +34,7 @@ to do:
     // backend
     - przerob jakies funkcje na promise
     - wyszukiwanie danych (?)
+
+    scss:
+        - matches kafelki
+        - ten napis pod tinder cards

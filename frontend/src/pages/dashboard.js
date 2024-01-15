@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect, useRef, useLayoutEffect} from 'react'
 import ChatContainer from '../components/ChatContainer'
 import TinderCard from 'react-tinder-card'
 import '../style/index.scss';
@@ -12,6 +12,8 @@ function DashboardPage() {
   const [cookies, setCookie, removeCookie] = useCookies(['user']);
   const [genderedUsers, setGenderedUsers] = useState(null);
   const [lastDirection, setLastDirection] = useState()
+
+  const hadCalledGetGenderedUsers = useRef(false);
 
   const userId = cookies.UserId;
 
@@ -38,39 +40,22 @@ function DashboardPage() {
     }
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     getUser();
   }, []);
 
-  useEffect(() => {
-    if (user) {
+  // useEffect(() => {
+  //   if (user) {
+  //     getGenderedUsers();
+  //   }
+  // }, [user]);
+
+  useLayoutEffect(() => {
+    if (user && !hadCalledGetGenderedUsers.current) {
       getGenderedUsers();
+      hadCalledGetGenderedUsers.current = true;
     }
   }, [user]);
-
-
-  console.log(genderedUsers)
-
-
-  const db = [
-  {
-    first_name: 'Agata Bartczak',
-    img_url: 'https://i.ibb.co/LSLZBBt/agata.jpg'
-  },
-  {
-    first_name: 'Szymon Grabski',
-    img_url: 'https://i.ibb.co/rckDXbC/szymon.jpg'
-  },
-  {
-    first_name: 'Sebastian Jablonski',
-    img_url: 'https://i.ibb.co/VLz0y1r/62-A18-AEE-8-ABB-4661-B7-FC-96818-CC50-DD1.jpg'
-  },
-  {
-    first_name: 'Oskar Gawryszewski',
-    img_url: 'https://i.ibb.co/2jSp1WW/65-B4-A638-923-B-4-E07-9-FA2-E29-F74-C8129-F.jpg'
-  },
-
-]
 
   const characters = genderedUsers;
 
@@ -120,11 +105,11 @@ function DashboardPage() {
           onSwipe={(dir) => swiped(dir, character.user_id)} 
           onCardLeftScreen={() => outOfFrame(character.first_name)}>
             <div style={{ backgroundImage: 'url(' + character.img_url + ')' }} className='card'>
-              <div className="card-info-content">
-                <h3>{character.first_name} {character.last_name}</h3>
-                <p>{character.location}</p>
-                <p>{character.about}</p>
-              </div>
+            </div>
+            <div className="card-info-content">
+            <h3>{character.first_name} {character.last_name}</h3>
+            <p className='location'>{character.location}</p>
+            <p className='about'>{character.about}</p>
             </div>
           </TinderCard>
         )}

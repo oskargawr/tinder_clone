@@ -21,6 +21,8 @@ button {
     padding: 1.2em 1.7em;
     border-radius: 2em;
     margin-bottom: 0.3em;
+    font-weight: 500;
+    letter-spacing: 0.03em;
 
     &:hover {
         cursor: pointer;
@@ -52,6 +54,7 @@ nav {
         background-color: white;
         font-size: 1em;
         font-weight: 600;
+        height: fit-content;
         padding: 0.6em 1em;
         border-radius: 0.8em;
         margin: 10px;
@@ -59,7 +62,7 @@ nav {
   
 
         &:hover {
-            cursor: pointer;
+            cursor: pointer; 
         }
 
         &:disabled {
@@ -132,14 +135,22 @@ nav {
     display: flex;
     flex-direction: column;
     gap: 0.3em;
+    font-size: 0.9em;
+
     input {
         width: 200px;
-        padding: 5px;
-        border-radius: 1em;
+        padding: 10px;
+        border-radius: 0.8em;
         border: none;
         align-self: center;
-        border: solid 1px;
+        border: solid 1px rgb(219, 219, 219);
+
+        &:focus {
+            outline: solid 1.5px rgb(219, 219, 219);
+        }
     }
+
+
     .input-wrapper {
         display: flex;
         flex-direction: column;
@@ -148,7 +159,7 @@ nav {
 
         .error-message {
             position: absolute;
-            bottom: -1.5em;
+            bottom: -1.3em;
             right: 0;
             color: red;
             font-size: 0.7em;
@@ -329,6 +340,39 @@ nav {
      border-radius: 30px;
      background-size: cover;
      background-position: center;
+     box-shadow: 0 0 20px rgba(118, 118, 118, 0.2);
+    }
+
+    .card-info-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 20px;
+        color: black;
+        background-color: #fff;
+        border-radius: 0 0 1em 1em;
+        border-top: solid 1px rgb(219, 219, 219);
+        display: flex;
+        flex-direction: column;
+
+        h3 {
+            font-size: 1.4em;
+            font-weight: 800;
+            align-self: flex-start;
+        }
+
+        p.location {
+            font-size: 0.7em;
+            font-weight: 600;
+            align-self: flex-start;
+        }
+
+        p.about {
+            font-size: 1em;
+            font-weight: 500;
+            align-self: flex-start;
+        }
     }
 
     .card h3 {
@@ -358,6 +402,20 @@ nav {
     text-align: left;
     z-index: 1;
 
+    .matches-chat-buttons {
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+        rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+        display: flex;
+        gap: 1em;
+        justify-content: space-around;
+
+            button:not(:disabled):hover  {
+                cursor: pointer;
+            }
+        }
+
+
+
     .chat-container-header {
         background: $primary-button-gradient;
         height: 100px;
@@ -372,7 +430,7 @@ nav {
         background-color: white;
         border-bottom: solid 4px #fe3072;
         font-size: 1.4em;
-        margin: 2px;
+        // margin: 2px;
         padding: 10px;
         font-weight: 600;
 

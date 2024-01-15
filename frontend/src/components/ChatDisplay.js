@@ -32,17 +32,6 @@ function ChatDisplay({user, clickedUser}) {
       console.log(err);
   }
 };
-
-//   const deleteMessage = async (messageId) => {
-//     try {
-//       const res = await axios.delete(`http://localhost:8000/messages/${messageId}`);
-//       getUserMessages();
-//       getClickedUsersMessages();
-//     } catch (err) {
-//       console.log(err);
-//   }
-// };
-
   
   useEffect(() => {
     getUserMessages();

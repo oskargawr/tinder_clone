@@ -11,7 +11,7 @@ function ChatContainer({user}) {
     <div className="chat-container">
         <ChatHeader user={user}/>
 
-        <div>
+        <div className='matches-chat-buttons'>
             <button className="option" onClick={() => setClickedUser(null)}>Matches</button>
             <button className="option" disabled={!clickedUser}>Chat</button>
         </div>

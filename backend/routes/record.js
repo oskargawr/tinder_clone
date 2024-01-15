@@ -149,7 +149,6 @@ recordRoutes.route('/gendered_users').get(async function (req, res) {
     let db_connect = dbo.getDb("tinder");
 
     const pref_gender = req.query.gender;
-    console.log(pref_gender);
 
     try {
         const query = { gender: pref_gender };
@@ -265,7 +264,6 @@ recordRoutes.route('/message').post(async function (req, res) {
     let db_connect = dbo.getDb("tinder");
 
     const { timestamp, from_userId, to_userId, message } = req.body;
-    console.log("message: ", message, "from_userId: ", from_userId, "to_userId: ", to_userId);
 
     try {
         const result = await db_connect.collection("messages").insertOne({
