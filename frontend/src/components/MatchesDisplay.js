@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import { FaTrash } from 'react-icons/fa';
+
 
 function MatchesDisplay({matches, setClickedUser}) {
   const [matchedProfiles, setMatchedProfiles] = useState(null);
@@ -20,6 +22,16 @@ function MatchesDisplay({matches, setClickedUser}) {
       console.log(err);
   }
 }
+  const deleteMatch = async (matchId) => {
+    try {
+      const res = await axios.delete(`http://localhost:8000/matches/${userId}/${matchId}`);
+      console.log(res.data);
+
+      setMatchedProfiles((prevMatches) => prevMatches.filter((match) => match.user_id !== matchId));
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     if (matches) {
@@ -35,12 +47,18 @@ function MatchesDisplay({matches, setClickedUser}) {
     <div className="matches-display">
         {filteredMatchedProfiles?.map((match, _index) => {
           return (
-            <div key={_index} className="match-card" onClick={() => setClickedUser(match)}>
-              <div className="img-container">
+            <>
+            <div key={match.user_id} className="match-card">
+              <div className="img-container" onClick={() => setClickedUser(match)}>
                 <img src={match?.img_url} alt="profile pic"/>
               </div>
               <p>{match.first_name}</p>
+              <div className="delete-match-icon">
+                <FaTrash onClick={() => deleteMatch(match.user_id)} />
+              </div>
             </div>
+  
+            </>
           )
         })}
         

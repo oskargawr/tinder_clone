@@ -21,16 +21,15 @@ to do:
     <!-- - napraw to ze trzeba odswiezyc strone zeby zobaczyc matches -->
     <!-- - napraw matches: dwie osoby musza siebie nawzajem dodac zeby bylo match -->
     <!-- - napraw confirm password!!! -->
-    - dodaj mozliwosc edycji danych w profliu
-    - wcisnij gdzies useLayoutEffect, useMemo, useRef i reducera // useLayout mam, useRef mam
+    <!-- - dodaj mozliwosc edycji danych w profliu -->
+    - wcisnij gdzies useMemo i reducera
     - wystyluj jakies rzeczy tailwindem czy cos
     - zmien nazwy plikow na jsx
     <!-- - dodaj mozliwosc usuniecia konta -->
     <!-- - edycja historii czatow --> /// dalem tylko mozliwosc usuniecia
-    - edycja matchow
+    <!-- - edycja matchow -->
     - kopia zapasowa profilu i mozliwosc importu
-    - wystyluj karte tindera
-    -napraw wyszukiwanie both plci
+    <!-- - wystyluj karte tindera -->
 
     // backend
     - przerob jakies funkcje na promise

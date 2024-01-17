@@ -349,4 +349,30 @@ recordRoutes.route('/edit_user').put(async function (req, res) {
     }
 });
 
+// usun match
+recordRoutes.route('/matches/:userId/:matchId').delete(async function (req, res) {
+    let db_connect = dbo.getDb("tinder");
+
+    const userId = req.params.userId;
+    const matchId = req.params.matchId;
+
+    try {
+        const query = { user_id: userId };
+        const updateDocument = {
+            $pull: {
+                matches: {
+                    user_id: matchId
+                }
+            }
+        }
+        const result = await db_connect.collection("users").updateOne(query, updateDocument);
+
+        res.json(result);
+
+    }
+    catch (err) {
+        console.error(err);
+    }
+});
+
 module.exports = recordRoutes;

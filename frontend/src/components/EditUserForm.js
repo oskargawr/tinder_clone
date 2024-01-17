@@ -70,13 +70,13 @@ return (
                     <div className="input-wrapper">
                         <label htmlFor="first_name" className='edit-label'>First Name</label>
                         <Field id="first_name" name="first_name" type="text" placeholder="First Name" />
-                        <ErrorMessage name="first_name" />
+                        <ErrorMessage name="first_name" component="div" className='error-message'/>
                     </div>
 
                     <div className="input-wrapper">
                         <label htmlFor="last_name" className='edit-label'>Last Name</label>
                         <Field id="last_name" name="last_name" type="text" placeholder="Last Name" />
-                        <ErrorMessage name="last_name" />
+                        <ErrorMessage name="last_name" component="div" className='error-message'/>
                     </div>
 
                     <div className="input-wrapper">
@@ -86,7 +86,7 @@ return (
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </Field>
-                        <ErrorMessage name="gender" />
+                        <ErrorMessage name="gender" component="div" className='error-message'/>
                     </div>
 
                     <div className="input-wrapper">
@@ -96,25 +96,25 @@ return (
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </Field>
-                        <ErrorMessage name="gender_interest" />
+                        <ErrorMessage name="gender_interest" component="div" className='error-message'/>
                     </div>
 
                     <div className="input-wrapper">
                         <label htmlFor="img_url" className='edit-label'>Image URL</label>
                         <Field id="img_url" name="img_url" type="text" placeholder="Image URL" />
-                        <ErrorMessage name="img_url" />
+                        <ErrorMessage name="img_url" component="div" className='error-message'/>
                     </div>
 
                     <div className="input-wrapper">
                         <label htmlFor="about" className='edit-label'>About</label>
                         <Field id="about" name="about" type="text" placeholder="About" />
-                        <ErrorMessage name="about" />
+                        <ErrorMessage name="about" component="div" className='error-message'/>
                     </div>
 
                     <div className="input-wrapper">
                         <label htmlFor="location" className='edit-label'>Location</label>
                         <Field id="location" name="location" type="text" placeholder="Location" />
-                        <ErrorMessage name="location" />
+                        <ErrorMessage name="location" component="div" className='error-message'/>
                     </div>
 
                     <button type="submit">Submit</button>
