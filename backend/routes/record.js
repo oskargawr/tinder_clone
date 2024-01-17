@@ -479,7 +479,7 @@ recordRoutes.route('/users/:year').get(async function (req, res) {
 
 recordRoutes.route('/load_user').post(async function (req, res) {
     let db_connect = dbo.getDb("tinder");
-    const { user } = req.body; // Pobierz obiekt użytkownika z klucza 'user'
+    const { user } = req.body;
     console.log(user);
 
     const existingUser = await db_connect.collection("users").findOne({ email: user.email });
@@ -487,7 +487,7 @@ recordRoutes.route('/load_user').post(async function (req, res) {
     try {
         if (existingUser) {
             console.log("User already exists");
-            res.status(400).json({ message: "User already exists" });
+            res.status(201).json({ message: "User already exists" });
         } else {
             const formattedUser = {
                 user_id: user.user_id,

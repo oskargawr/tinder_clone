@@ -16,6 +16,8 @@ function HomePage() {
     const [isSignUp, setIsSignUp] = useState(true);
     const [cookies, setCookie, removeCookie] = useCookies(['user']);
     const [authToken, setAuthToken] = useState(false);
+    const [showSaveMessage, setShowSaveMessage] = useState(false);
+    const [saveMessage, setSaveMessage] = useState('Saved!');
 
     const userId = cookies.UserId;
   
@@ -67,17 +69,28 @@ const handleLoad = async (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
 
-    reader.addEventListener('load', async (event) => {
-      const user = JSON.parse(reader.result);
+    try {
+      reader.addEventListener('load', async (event) => {
+        const user = JSON.parse(reader.result);
 
-      const res = await axios.post('http://localhost:8000/load_user', {
-        user
+        const res = await axios.post('http://localhost:8000/load_user', {
+          user
+        });
+
+        const sukces = res.status === 200;
+
+        if (sukces) {
+          setSaveMessage('Loaded!');
+        } else {
+          setSaveMessage('Failed!');
+        }
       });
-
-      const sukces = res.status === 200;
-    });
+    } catch (err) {
+      console.error(err);
+    }
 
     reader.readAsText(file);
+    setShowSaveMessage(true);
   } catch (err) {
     console.error(err);
   }
@@ -115,6 +128,11 @@ const handleLoad = async (event) => {
             <button className="primary-button">
               <CiSaveDown2 style={{ fontSize: '16px'}} onClick={handleSave}/>
             </button>
+          </div>
+        )}
+        {showSaveMessage && (
+          <div className="save-message">
+            <p style={{fontWeight: 700, fontSize: '1.5em', color: 'white'}}>{saveMessage}</p>
           </div>
         )}
     </div>

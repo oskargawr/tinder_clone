@@ -22,19 +22,19 @@ to do:
     <!-- - napraw matches: dwie osoby musza siebie nawzajem dodac zeby bylo match -->
     <!-- - napraw confirm password!!! -->
     <!-- - dodaj mozliwosc edycji danych w profliu -->
-    - wcisnij gdzies useMemo i reducera
+    - wcisnij gdzies useMemo
     - wystyluj jakies rzeczy tailwindem czy cos
-    - zmien nazwy plikow na jsx
+    <!-- - zmien nazwy plikow na jsx -->
     <!-- - dodaj mozliwosc usuniecia konta -->
-    <!-- - edycja historii czatow --> /// dalem tylko mozliwosc usuniecia
+    <!-- - edycja historii czatow --> 
     <!-- - edycja matchow -->
-    - kopia zapasowa profilu i mozliwosc importu
+    <!-- - kopia zapasowa profilu i mozliwosc importu -->
     <!-- - wystyluj karte tindera -->
 
     // backend
-    - przerob jakies funkcje na promise
-    - wyszukiwanie danych (?)
+    <!-- - przerob jakies funkcje na promise -->
+    <!-- - wyszukiwanie danych (?) -->
 
-    scss:
+    <!-- scss:
         <!-- - matches kafelki -->
-        - ten napis pod tinder cards
+        - ten napis pod tinder cards -->
