@@ -375,4 +375,28 @@ recordRoutes.route('/matches/:userId/:matchId').delete(async function (req, res)
     }
 });
 
+// edytuj wiadomosc
+recordRoutes.route('/messages/:id').put(async function (req, res) {
+    let db_connect = dbo.getDb("tinder");
+
+    const messageId = req.params.id;
+    const { message } = req.body;
+
+    try {
+        const query = { _id: new ObjectId(messageId) };
+        const updateDocument = {
+            $set: {
+                message: message
+            }
+        }
+        const result = await db_connect.collection("messages").updateOne(query, updateDocument);
+
+        res.json(result);
+
+    }
+    catch (err) {
+        console.error(err);
+    }
+});
+
 module.exports = recordRoutes;
