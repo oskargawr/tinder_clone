@@ -9,7 +9,7 @@ import axios from 'axios';
 
 function Chat({descendingOrderMessages, getUserMessages, getClickedUsersMessages}) {
   const [cookies, setCookie, removeCookie] = useCookies(['user']);
-  const [clickedMessage, setClickedMessage] = useState(""); // [message, setMessage
+  const [clickedMessage, setClickedMessage] = useState("");
   const [showEditMessageInput, setShowEditMessageInput] = useState(false);
   const [editedMessage, setEditedMessage] = useState("");
   const userId = cookies.UserId;

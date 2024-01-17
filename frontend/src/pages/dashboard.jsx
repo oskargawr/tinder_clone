@@ -4,7 +4,7 @@ import TinderCard from 'react-tinder-card'
 import '../style/index.scss';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
-import { AuthProvider } from '../context/AuthContext.js';
+import { AuthProvider } from '../context/AuthContext.jsx';
 
 
 function DashboardPage() {
@@ -79,14 +79,11 @@ function DashboardPage() {
     genderedUsers => !matchedUserIds.includes(genderedUsers.user_id)
   )
 
-  console.log("gendered users: ", genderedUsers);
-  console.log("filtered gendered users: ", filteredGenderedUsers);
-
   return (
     <>
     { user &&
     <div className="dashboard">
-      <ChatContainer user={user} getUser={getUser} getGenderedUsers={getGenderedUsers}/>
+      <ChatContainer user={user} getUser={getUser} getGenderedUsers={getGenderedUsers} genderedUsers={genderedUsers}/>
       <div className="swipe-container">
         <div className="card-container">
           {filteredGenderedUsers?.map((character) =>

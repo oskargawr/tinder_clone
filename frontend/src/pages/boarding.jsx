@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
-import Nav from '../components/Nav.js'
-import RegistrationForm from '../components/OnBoardingForm.js'
+import Nav from '../components/Nav.jsx'
+import RegistrationForm from '../components/OnBoardingForm.jsx'
 import '../style/index.scss';
-import { AuthProvider } from '../context/AuthContext.js';
+import { AuthProvider } from '../context/AuthContext.jsx';
 
 function Boarding() {
   return (

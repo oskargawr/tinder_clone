@@ -36,5 +36,5 @@ to do:
     - wyszukiwanie danych (?)
 
     scss:
-        - matches kafelki
+        <!-- - matches kafelki -->
         - ten napis pod tinder cards

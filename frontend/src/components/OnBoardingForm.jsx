@@ -58,18 +58,12 @@ const RegistrationForm = () => {
     });
 
     const onSubmit = async (values) => {
-        console.log('Form data', values);
-
         try {
             const formData = {
                 ...values,
                 user_id: cookies.UserId,
             }
-            console.log('dane z form', formData);
             const res = await axios.put('http://localhost:8000/update_user', { ...values, user_id: cookies.UserId });
-            console.log(res.data);
-
-            console.log(res.status);
             const success = res.status === 200;
 
             if (success) {

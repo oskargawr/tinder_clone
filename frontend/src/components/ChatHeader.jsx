@@ -7,7 +7,7 @@ import { MdEdit } from "react-icons/md";
 import EditUserForm from './EditUserForm';
 import axios from 'axios';
 
-function ChatHeader({user, getUser, getGenderedUsers}) {
+function ChatHeader({user, getUser, getGenderedUsers, genderedUsers}) {
   const [cookies, setCookie, removeCookie] = useCookies(['user']);
   const [showEditUserForm, setShowEditUserForm] = useState(false);
   const router = useRouter();
@@ -28,7 +28,6 @@ function ChatHeader({user, getUser, getGenderedUsers}) {
   }
 
   const editAccount = () => {
-    console.log('edit account');
     setShowEditUserForm(true);
     }
   return (
@@ -53,7 +52,7 @@ function ChatHeader({user, getUser, getGenderedUsers}) {
         </div>
     </div>
     {showEditUserForm && (
-        <EditUserForm setShowEditUserForm={setShowEditUserForm} user={user} getUser={getUser} getGenderedUsers={getGenderedUsers}/>
+        <EditUserForm setShowEditUserForm={setShowEditUserForm} user={user} getUser={getUser} getGenderedUsers={getGenderedUsers} genderedUsers={genderedUsers}/>
     )}
     </>
   )

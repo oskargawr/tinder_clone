@@ -47,7 +47,6 @@ function MatchesDisplay({matches, setClickedUser}) {
     <div className="matches-display">
         {filteredMatchedProfiles?.map((match, _index) => {
           return (
-            <>
             <div key={match.user_id} className="match-card">
               <div className="img-container" onClick={() => setClickedUser(match)}>
                 <img src={match?.img_url} alt="profile pic"/>
@@ -57,8 +56,6 @@ function MatchesDisplay({matches, setClickedUser}) {
                 <FaTrash onClick={() => deleteMatch(match.user_id)} />
               </div>
             </div>
-  
-            </>
           )
         })}
         

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -6,8 +6,9 @@ import { useCookies } from 'react-cookie';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
-function EditUserForm({setShowEditUserForm, user, getUser, getGenderedUsers}) {
+function EditUserForm({setShowEditUserForm, user, getUser, getGenderedUsers, genderedUsers}) {
     const [cookies, setCookie, removeCookie] = useCookies(['user']);
+    const [formSubmitted, setFormSubmitted] = useState(false); 
     const router = useRouter();
 
     const closeForm = () => {
@@ -35,8 +36,6 @@ function EditUserForm({setShowEditUserForm, user, getUser, getGenderedUsers}) {
     });
 
     const onSubmit = async (values) => {
-        console.log('Form data', values);
-
         try {
             const formData = {
                 ...values,
@@ -44,16 +43,21 @@ function EditUserForm({setShowEditUserForm, user, getUser, getGenderedUsers}) {
                 matches: user.matches
             }
             const res = await axios.put('http://localhost:8000/edit_user', { ...values, user_id: cookies.UserId, matches: user.matches });
-            console.log(res.data);
 
         } catch (err) {
             console.error(err);
         }
-
+        window.location.reload();
         setShowEditUserForm(false);
-        getUser();
-        getGenderedUsers();
     }
+
+    useEffect(() => {
+        getUser();
+    }, [user]);
+    
+    useEffect(() => {
+        getGenderedUsers();
+    }, [user]);
 
 return (
     <div className='edit-user-form-container'>

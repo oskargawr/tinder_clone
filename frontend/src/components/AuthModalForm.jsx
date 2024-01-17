@@ -30,10 +30,8 @@ function AuthModalForm({isSignUp}) {
         if (isSignUp) {
             try {
                 const res = await axios.post('http://localhost:8000/signup', values);
-                console.log(res.data);
 
                 const success = res.status === 201;
-                console.log("sukces:" + res.status);
 
                 setCookie('UserId', res.data.userId)
                 setCookie('AuthToken', res.data.token)
@@ -47,8 +45,6 @@ function AuthModalForm({isSignUp}) {
         } else {
             try {
                 const res = await axios.post('http://localhost:8000/login', values);
-                console.log(res.data);
-
                 const success = res.status === 201;
 
 
