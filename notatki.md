@@ -20,6 +20,7 @@ to do:
     <!-- - napraw to ze te karty z tindera uciekaja i rozszerzaja strone-->
     <!-- - napraw to ze trzeba odswiezyc strone zeby zobaczyc matches -->
     <!-- - napraw matches: dwie osoby musza siebie nawzajem dodac zeby bylo match -->
+    <!-- - napraw confirm password!!! -->
     - dodaj mozliwosc edycji danych w profliu
     - wcisnij gdzies useLayoutEffect, useMemo, useRef i reducera // useLayout mam, useRef mam
     - wystyluj jakies rzeczy tailwindem czy cos

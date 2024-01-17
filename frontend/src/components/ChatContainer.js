@@ -3,13 +3,13 @@ import ChatHeader from './ChatHeader';
 import MatchesDisplay from './MatchesDisplay';
 import ChatDisplay from './ChatDisplay';
 
-function ChatContainer({user}) {
+function ChatContainer({user, getUser, getGenderedUsers}) {
   const [clickedUser, setClickedUser] = useState(null);
 
   console.log("clicked user: ", clickedUser)
   return (
     <div className="chat-container">
-        <ChatHeader user={user}/>
+        <ChatHeader user={user} getUser={getUser} getGenderedUsers={getGenderedUsers}/>
 
         <div className='matches-chat-buttons'>
             <button className="option" onClick={() => setClickedUser(null)}>Matches</button>

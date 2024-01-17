@@ -1,13 +1,15 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useCookies } from 'react-cookie'
 import { useRouter } from 'next/router'
 import { CiLogout } from "react-icons/ci";
 import { FaTrash } from 'react-icons/fa';
 import { MdEdit } from "react-icons/md";
+import EditUserForm from './EditUserForm';
 import axios from 'axios';
 
-function ChatHeader({user}) {
+function ChatHeader({user, getUser, getGenderedUsers}) {
   const [cookies, setCookie, removeCookie] = useCookies(['user']);
+  const [showEditUserForm, setShowEditUserForm] = useState(false);
   const router = useRouter();
 
   const logout = () => {
@@ -26,9 +28,11 @@ function ChatHeader({user}) {
   }
 
   const editAccount = () => {
-     console.log('edit account'); 
+    console.log('edit account');
+    setShowEditUserForm(true);
     }
   return (
+    <>
     <div className="chat-container-header">
         <div className="profile">
             <div className="img-container">
@@ -48,6 +52,10 @@ function ChatHeader({user}) {
           </i>
         </div>
     </div>
+    {showEditUserForm && (
+        <EditUserForm setShowEditUserForm={setShowEditUserForm} user={user} getUser={getUser} getGenderedUsers={getGenderedUsers}/>
+    )}
+    </>
   )
 }
 

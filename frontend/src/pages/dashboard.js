@@ -34,7 +34,6 @@ function DashboardPage() {
         params: { gender: user?.gender_interest }
       });
       setGenderedUsers(res.data);
-      // console.log(res.data)
     } catch (err) {
       console.error(err);
     }
@@ -44,20 +43,12 @@ function DashboardPage() {
     getUser();
   }, []);
 
-  // useEffect(() => {
-  //   if (user) {
-  //     getGenderedUsers();
-  //   }
-  // }, [user]);
-
   useLayoutEffect(() => {
     if (user && !hadCalledGetGenderedUsers.current) {
       getGenderedUsers();
       hadCalledGetGenderedUsers.current = true;
     }
   }, [user]);
-
-  const characters = genderedUsers;
 
   const updateMatches = async (matchedUserId) => {
     try {
@@ -95,7 +86,7 @@ function DashboardPage() {
     <>
     { user &&
     <div className="dashboard">
-      <ChatContainer user={user}/>
+      <ChatContainer user={user} getUser={getUser} getGenderedUsers={getGenderedUsers}/>
       <div className="swipe-container">
         <div className="card-container">
           {filteredGenderedUsers?.map((character) =>

@@ -542,6 +542,7 @@ nav {
 .chat-container {
     display: flex;
     flex-direction: column;
+    min-width: fit-content;
 
     .matches-display {
         width: 90%;
@@ -571,6 +572,94 @@ nav {
             p {
                 font-size: 0.8em;
                 font-weight: 600;
+            }
+        }
+    }
+}
+
+// edit user form
+
+.edit-user-form-container {
+    display: flex;
+    flex-direction: column;
+
+    .close-icon {
+        align-self: center;
+        padding: 0.3em;
+        color: rgb(187, 187, 187);
+        height: fit-content;
+        width: fit-content;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .edit-user-form {
+        .form-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3em;
+            padding: 0.2em;
+            input {
+                width: 70%;
+                padding: 10px;
+                border-radius: 0.8em;
+                border: none;
+                align-self: center;
+                border: solid 1px rgb(219, 219, 219);
+                align-self: flex-end;
+
+                &:focus {
+                    outline: solid 1.5px rgb(219, 219, 219);
+                }
+            }
+
+            label {
+                align-self: flex-start;
+                font-size: 0.8em;
+                font-weight: 600;                
+            }
+
+            select {
+                padding: 10px;
+                border-radius: 0.8em;
+                border: none;
+                align-self: center;
+                border: solid 1px rgb(219, 219, 219);
+
+                &:focus {
+                    outline: solid 1.5px rgb(219, 219, 219);
+                }
+            }
+
+            button {
+                align-self: center;
+                padding: 10px 20px;
+                border: solid 2px rgb(219, 219, 219);
+                border-radius: 10px;
+                background-color: white;
+                color: rgb(121, 119, 119);
+                font-weight: 500;
+                font-size: 15px;
+                text-transform: uppercase;
+
+                &:hover {
+                    cursor: pointer;
+                    background-color: rgb(121, 119, 119);
+                    color: white;
+                }
+            }
+
+            .input-wrapper {
+                display: flex;
+                gap: 0.3em;
+                // justify-content: space-between;
+            }
+
+            .edit-label {
+                width: 90px;
+                align-self: center;
             }
         }
     }

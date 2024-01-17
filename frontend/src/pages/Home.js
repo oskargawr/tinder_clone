@@ -49,7 +49,6 @@ function HomePage() {
             {authToken !== false ? 'Signout' : 'Create account'}
         </button>
         )}
-
         {showModal && <AuthModal setShowModal={setShowModal} isSignUp={isSignUp} setIsSignUp={setIsSignUp}/>}
     </div>
     </div>

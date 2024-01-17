@@ -70,7 +70,6 @@ recordRoutes.route('/login').post(async function (req, res) {
     const { email, password } = req.body;
 
     const existingUser = await db_connect.collection("users").findOne({ email });
-    console.log(existingUser);
 
     try {
         if (!existingUser) {
@@ -190,7 +189,6 @@ recordRoutes.route('/users').get(async function (req, res) {
     let db_connect = dbo.getDb("tinder");
 
     const userIds = JSON.parse(req.query.userIds);
-    // console.log("userIds: ", userIds);
 
     try {
         const pipeline = [
@@ -250,8 +248,6 @@ recordRoutes.route('/messages').get(async function (req, res) {
     try {
         const query = { from_userId: userId, to_userId: correspondingUserId };
         const result = await db_connect.collection("messages").find(query).toArray();
-
-        // const messages = result.matches.find(({ user_id }) => user_id === correspondingUserId).messages;
 
         res.send(result);
     } catch (err) {
@@ -318,6 +314,37 @@ recordRoutes.route('/delete_user/:id').delete(async function (req, res) {
 
         res.json(result);
     } catch (err) {
+        console.error(err);
+    }
+});
+
+// edycja danych
+recordRoutes.route('/edit_user').put(async function (req, res) {
+    let db_connect = dbo.getDb("tinder");
+
+    const formData = req.body;
+
+    try {
+        const query = { user_id: formData.user_id };
+        const updateDocument = {
+            $set: {
+                first_name: formData.first_name,
+                last_name: formData.last_name,
+                dob: formData.dob,
+                gender: formData.gender,
+                gender_interest: formData.gender_interest,
+                img_url: formData.img_url,
+                about: formData.about,
+                location: formData.location,
+                matches: formData.matches
+            }
+        }
+        const result = await db_connect.collection("users").updateOne(query, updateDocument);
+
+        res.json(result);
+
+    }
+    catch (err) {
         console.error(err);
     }
 });
