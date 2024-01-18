@@ -30,6 +30,10 @@ function ChatHeader({user, getUser, getGenderedUsers, genderedUsers}) {
   const editAccount = () => {
     setShowEditUserForm(true);
     }
+
+  const redirectToHome = () => {
+    router.push('/');
+  }
   return (
     <>
     <div className="chat-container-header">
@@ -37,7 +41,7 @@ function ChatHeader({user, getUser, getGenderedUsers, genderedUsers}) {
             <div className="img-container">
                 <img src={user.img_url} alt="abc" />
             </div>
-            <h3>Hello, <span>{user.first_name}</span>!</h3>
+            <h3>Hello, <span onClick={redirectToHome}>{user.first_name}</span>!</h3>
         </div>
         <div className="action-buttons">
           <i className="log-out-icon" onClick={logout}>

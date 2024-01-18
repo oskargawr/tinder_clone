@@ -477,6 +477,7 @@ recordRoutes.route('/users/:year').get(async function (req, res) {
     }
 });
 
+// zaladuj uzytkownika - funkcja ladowania z pliku
 recordRoutes.route('/load_user').post(async function (req, res) {
     let db_connect = dbo.getDb("tinder");
     const { user } = req.body;
