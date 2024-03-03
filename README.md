@@ -9,4 +9,5 @@ Zbudowana przeze mnie aplikacja typu Tinder. Aplikacja pozwala na przeglądanie 
 * Express
 * Node.js
 * SCSS
+* Docker
 
